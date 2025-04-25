@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+    <title>Credit savings calculator</title>
+</head>
+<body>
+    <div id="credit-recalculate-outer-container">
+        <div id="credit-recalculate-outer-wrapper">
+            <h3 id="credit-recalculate-title-heading" class="credit-recalculate-heading">Mortgage refinancing calculator</h3>
+            <div id="credit-recalculate-inner-container">
+                <div id="credit-recalculate-inner-left-container">
+                    <h4 class="credit-recalculate-heading credit-recalculate-sub-heading">Your current credit</h4>
+                    <div class="credit-recalculate-line-wrapper">
+                        <span class="credit-recalculate-line-title">Amount to pay:</span>
+                        <input id="recalculate-credit-user-amount" class="credit-recalculate-input" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" type="text"/>
+                        <span id="credit-recalculate-currency-units" class="credit-recalculate-units"></span>    <!--Change your units here-->
+                    </div>
+                    <p id="user-amount-error" class="credit-recalculate-input-error"></p>
+                    <div class="credit-recalculate-line-wrapper">
+                        <span class="credit-recalculate-line-title">Interest rate:</span>
+                        <input id="recalculate-interest-rate" class="credit-recalculate-input" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" type="text"/>
+                        <span class="credit-recalculate-units">%</span>
+                    </div>
+                    <p id="user-interest-rate-error" class="credit-recalculate-input-error"></p>
+                    <div class="credit-recalculate-line-wrapper">
+                        <span class="credit-recalculate-line-title">Finish date:</span>
+                        <div id="credit-recalculate-container-input">
+                            <select id="credit-recalculate-day" class="credit-recalculate-select">
+                                <option value="">dd</option>
+                            </select>
+                            <span class="credit-recalculate-date-separator">/</span>
+                            <select id="credit-recalculate-month" class="credit-recalculate-select">
+                                <option value="">mm</option>
+                            </select>
+                            <span class="credit-recalculate-date-separator">/</span>
+                            <select id="credit-recalculate-year" class="credit-recalculate-select">
+                                <option value="">yyyy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p id="user-credit-period-error" class="credit-recalculate-input-error"></p>
+                    <div id="recalculate-button-wrapper">
+                        <button id="recalculate-button" onclick="recalculateCredit()">Calculate</button>
+                        <p id="recalculate-credit-error-message"></p>
+                    </div>
+                </div>
+                <div id="credit-recalculate-inner-right-container">
+                    <h4 class="credit-recalculate-heading credit-recalculate-sub-heading">Credit after refinancing</h4>
+                    <div id="credit-recalculate-offer-summary-container">
+                        <div class="credit-recalculate-offer-line-wrapper">
+                            <span class="credit-recalculate-offer-line-title">Amount to pay:</span>
+                            <span id="recalculated-total-credit" class="credit-recalculate-offer-line-title credit-recalculate-offer-line-title-important">-</span>
+                        </div>
+                        <div class="credit-recalculate-offer-line-wrapper">
+                            <span class="credit-recalculate-offer-line-title">Interest rate:</span>
+                            <span id="recalculated-interest-rate" class="credit-recalculate-offer-line-title credit-recalculate-offer-line-title-important">-</span>
+                        </div>
+                        <div class="credit-recalculate-offer-line-wrapper">
+                            <span class="credit-recalculate-offer-line-title">Finish date:</span>
+                            <span id="recalculated-credit-finish" class="credit-recalculate-offer-line-title credit-recalculate-offer-line-title-important">-</span>
+                        </div>
+                    </div>
+                    <div id="credit-recalculate-results-outer-container">
+                        <div id="credit-recalculate-result-installments-outer-container">
+                            <div id="credit-recalculate-result-old-installment-container" class="credit-recalculate-installment-container">
+                                <h5 class="credit-recalculate-heading credit-recalculate-small-heading">Old inst.</h5>
+                                <div id="credit-recalculate-old-installment-visual" class="credit-recalculate-installment-visual">
+                                    <p id="credit-recalculate-old-installment-value" class="credit-recalculate-installment-value"></p>
+                                </div>
+                            </div>
+                            <div id="credit-recalculate-result-new-installment-container" class="credit-recalculate-installment-container">
+                                <h5 class="credit-recalculate-heading credit-recalculate-small-heading">New inst.</h5>
+                                <div id="credit-recalculate-new-installment-visual" class="credit-recalculate-installment-visual">
+                                    <p id="credit-recalculate-new-installment-value" class="credit-recalculate-installment-value"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="credit-recalculate-result-summary-container">
+                            <div id="credit-recalculate-result-header-container">
+                                <img id="credit-recalculate-results-arrow" src="arrow.png"/>
+                                <h5 class="credit-recalculate-heading credit-recalculate-small-heading">Your savings</h5>
+                            </div>
+                            <div id="credit-recalculate-result-summary-wrapper">
+                                <div id="credit-recalculate-result-left-wrapper">
+                                    <p id="credit-recalculate-savings-monthly" class="credit-recalculate-savings"></p>
+                                    <p id="credit-recalculate-savings-yearly" class="credit-recalculate-savings"></p>
+                                    <p id="credit-recalculate-savings-total" class="credit-recalculate-savings"></p>
+                                </div>
+                                <div id="credit-recalculate-result-right-wrapper">
+                                    <p class="credit-recalculate-result-paragraph">monthly</p>
+                                    <p class="credit-recalculate-result-paragraph">yearly</p>
+                                    <p class="credit-recalculate-result-paragraph">on entire credit</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="credit-recalculate-anchor-element"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
