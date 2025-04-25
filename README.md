@@ -12,16 +12,12 @@ This calculator allows users to compare their credit with the one that currently
 
 **Frontend:** HTML, Javascript
 
-**Backend:** -----
-
-**Database:** -----
-
 ## 🧑‍💻 Getting Started
 
 ### Installation
 
 ```bash
-git clone git@github.com:pp-start/React-SMS-Notifications.git
+git clone git@github.com:pp-start/Credit-Savings-Calculator.git
 ```
 
 ## 🧾 License
